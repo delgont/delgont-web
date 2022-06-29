@@ -1,0 +1,40 @@
+{
+    "name": "delgont/web",
+    "description" : "Delgont Website helpers and classes",
+    "keywords": [
+        "Laravel CMS",
+        "laravel",
+        "Content Management System",
+        ""
+    ],
+    "homepage": "https://github.com/delgont/delgont-web",
+    "type" : "project",
+    "license" : "MIT",
+    "authors" : [
+        {
+            "name" : "Okello Stephen Omoding",
+            "email" : "okellostephenomoding@outlook.com"
+        },
+        {
+            "name" : "Stephen Delgont",
+            "email" : "stephen.delgont@outlook.com"
+        }
+    ],
+    
+    "minimum-stability" : "dev",
+    "autoload": {
+        "psr-4": {
+            "Web\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Web\\DelgontWebServiceProvider"
+            ]
+        }
+    }
+}
