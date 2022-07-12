@@ -8,6 +8,7 @@
     "homepage": "https://github.com/delgont/delgont-web",
     "type" : "library",
     "license" : "MIT",
+    "authors" : [
         {
             "name" : "Stephen Okello Omoding",
             "email" : "okellostephenomoding@gmail.com",
