@@ -1,35 +1,89 @@
-[![](https://raw.githubusercontent.com/stephendevs/stephendevs/main/pagman/lcms.jpg)](ttps://www.linkedin.com/in/stephendev)
-
-<h1><span style="color:#FFd;border:1px solid white;padding:5px;border-radius:10px;">Laravel</span> <span style="color:yellow;">CMS</span>  <span style="color:red;">Package</span></h1>
-
----
-
-
-### Installation
-Using Composer On fresh laravel project run `composer require stephendevs/pagman`
 ```php
-composer require stephendevs/pagman
+composer require delgont/web
 ```
-Check if `lad` has been included by running `composer show stephendevs/lad` If `lad` is included run the command `php artisan lad:install` to set it up. For a fresh install of `lad` run `php artisan lad:install --fresh`
 ```php
-composer show stephendevs/lad
-php artisan lad:install
-```
-### Publish Assets & Configs
+<?php
 
-```php
-php artisan vendor:publish --tag=pagman-assets --force
-php artisan vendor:publish --tag=pagman-config --force
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Web\Support\Controllers\PageController as Controller;
+
+class PageController extends Controller
+{
+    protected $index = 'page';
+}
 ```
 
-### Database Migration & Default Admin User Creation.
-With proper DB Configurations run `php artisan migrate` to the migrate you Database Tables & Create default admin user `php artisan create:admin --default`
 ```php
-php artisan migrate
-php artisan create:admin --default
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Web\Support\Controllers\HomePageController as Controller;
+
+class HomeController extends Controller
+{
+    protected $pageView ='index';
+
+
+    protected $key = 'home';
+}
 ```
 
----
-<p><i>Still confused on how to develop laravel CSM (Pagman) website theme (Template) , Click
-<a href="https://github.com/stephendevs/pagmanbasicthemedevelopment">here</a>
-to get started</i><p>
+```php
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
+Route::get('/{page_key}', 'PageController@index')->name('klinik.page');
+```
+
+```php
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Laravel</title>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
+       
+    </head>
+    <body>
+        <h1>{{ $page->page_title }}</h1>
+        <small>{{$page->extract_text}}</small>
+        <div>
+        {!! $page->page_content !!}
+        </div>
+
+        <div>
+            <h1>Posts</h1>
+            @if (count($posts))
+                @foreach ($posts as $post)
+                    <div>
+                        <h4>{{ $post->post_title }}</h4>
+                        <div>
+                            {!! $post->post_content !!}
+                        </div><hr />
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </body>
+</html>
+```
