@@ -27,9 +27,10 @@ trait ShowsPage
     public function index($page_key)
     {
         $page = Page::where('page_key', $page_key)->firstOrFail();
-        return $posts = $this->posts($page->post_type);
+        $posts = $this->posts($page->post_type);
         return (request()->expectsJson()) ? response()->json(['page' => $page, 'posts' => $posts]) : view($this->getPageView(), compact(['page','posts']));
     }
+
 
     protected function getPageView() : string
     {
